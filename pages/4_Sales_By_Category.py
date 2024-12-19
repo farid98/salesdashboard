@@ -23,14 +23,6 @@ df = load_data("dummy_sales_data.csv")
 st.markdown(
     """
 # 📈 Sales Over Time by Category
-This page shows the sales over time for all product categories on a single graph.
-
-**Features:**
-- Filter by date range, customer segments, and states.
-- Toggle between daily, monthly, or quarterly aggregation.
-- Toggle between showing the data as a trend (periodic) or cumulative over time.
-
-Use the filters on the left to narrow down the data, then select how you want to view the time series.
 """
 )
 
@@ -73,13 +65,13 @@ if "All" in selected_states:
 
 filtered_df = filtered_df[filtered_df["State"].isin(selected_states)]
 
-st.write(f"**Date Range:** {start_date} to {end_date}")
-st.write(
-    f"**Customer Segments:** {', '.join(selected_segments) if selected_segments else 'None'}"
-)
-st.write(f"**States:** {', '.join(selected_states) if selected_states else 'None'}")
+# st.write(f"**Date Range:** {start_date} to {end_date}")
+# st.write(
+#     f"**Customer Segments:** {', '.join(selected_segments) if selected_segments else 'None'}"
+# )
+# st.write(f"**States:** {', '.join(selected_states) if selected_states else 'None'}")
 
-st.markdown("---")
+# st.markdown("---")
 
 # View type: Trend or Cumulative
 view_type = st.radio(

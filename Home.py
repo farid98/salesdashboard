@@ -22,9 +22,8 @@ df = load_data("dummy_sales_data.csv")
 st.markdown(
     """
 # 📊 Sales Dashboard
-Welcome to the Sales Dashboard! This dashboard provides an interactive and dynamic way to explore sales, margins, and product performance across various dimensions.
 
-Use the sidebar filters to narrow down the data and explore different views of the metrics. Use the navigation in the top-left corner to access the drill-down page for more detailed analyses.
+Use the sidebar filters to narrow down the data and explore different views of the metrics.
 """
 )
 
@@ -67,15 +66,15 @@ selected_segments = st.sidebar.multiselect(
 )
 filtered_df = filtered_df[filtered_df["Customer Segment"].isin(selected_segments)]
 
-st.markdown(f"**Date Range:** {start_date} to {end_date}")
-st.markdown(
-    f"**Product Categories:** {', '.join(selected_categories) if selected_categories else 'None'}"
-)
-st.markdown(
-    f"**Customer Segments:** {', '.join(selected_segments) if selected_segments else 'None'}"
-)
+# st.markdown(f"**Date Range:** {start_date} to {end_date}")
+# st.markdown(
+#     f"**Product Categories:** {', '.join(selected_categories) if selected_categories else 'None'}"
+# )
+# st.markdown(
+#     f"**Customer Segments:** {', '.join(selected_segments) if selected_segments else 'None'}"
+# )
 
-st.markdown("---")
+# st.markdown("---")
 
 # High-level Metrics
 total_sales = filtered_df["Total Sales"].sum() if not filtered_df.empty else 0
@@ -235,9 +234,3 @@ if not filtered_df.empty:
     chart_col4.altair_chart(bar_chart_segment, use_container_width=True)
 else:
     chart_col4.write("No data available for the selected filters.")
-
-st.markdown("---")
-
-st.write(
-    "Use the sidebar to filter the data. Navigate to the 'Drill Down' page (in the sidebar menu) to explore state and city-level details."
-)

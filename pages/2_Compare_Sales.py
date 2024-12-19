@@ -21,7 +21,7 @@ df = load_data("dummy_sales_data.csv")
 st.markdown(
     """
 # 🔀 Compare Sales Between Two States
-Use the filters on the left to narrow down your view. Then select two states below to compare their sales side-by-side. This can help you identify regional differences in sales performance.
+Use the filters on the left to narrow down your view. Then select two states below to compare their sales side-by-side. 
 """
 )
 
@@ -56,13 +56,13 @@ selected_segments = st.sidebar.multiselect(
 )
 filtered_df = filtered_df[filtered_df["Customer Segment"].isin(selected_segments)]
 
-st.write(f"**Date Range:** {start_date} to {end_date}")
-st.write(
-    f"**Product Categories:** {', '.join(selected_categories) if selected_categories else 'None'}"
-)
-st.write(
-    f"**Customer Segments:** {', '.join(selected_segments) if selected_segments else 'None'}"
-)
+# st.write(f"**Date Range:** {start_date} to {end_date}")
+# st.write(
+#     f"**Product Categories:** {', '.join(selected_categories) if selected_categories else 'None'}"
+# )
+# st.write(
+#     f"**Customer Segments:** {', '.join(selected_segments) if selected_segments else 'None'}"
+# )
 
 st.markdown("---")
 
