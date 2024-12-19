@@ -37,19 +37,17 @@ st.sidebar.write(
     "Select the date range, product categories, and customer segments to filter the data."
 )
 
-
-# Date Range via Slider
+# Date Range Filter
 min_date = df["Date"].min()
 max_date = df["Date"].max()
-
 start_date, end_date = st.sidebar.slider(
     "Select Date Range:",
     min_value=min_date.to_pydatetime().date(),
     max_value=max_date.to_pydatetime().date(),
     value=(min_date.to_pydatetime().date(), max_date.to_pydatetime().date()),
-    format="YYYY-MM-DD",
 )
 
+# Filter data based on date range
 filtered_df = df[
     (df["Date"] >= pd.to_datetime(start_date))
     & (df["Date"] <= pd.to_datetime(end_date))
@@ -84,53 +82,64 @@ total_sales = filtered_df["Total Sales"].sum() if not filtered_df.empty else 0
 total_margin = filtered_df["Margin"].sum() if not filtered_df.empty else 0
 avg_margin_pct = filtered_df["Margin %"].mean() if not filtered_df.empty else 0
 
-# Use theme variables for background and text color
+# Use custom CSS for background and text color
 st.markdown(
     """
-<style>
-.metrics-container {
-    background-color: var(--background-color);
-    padding: 20px;
-    border-radius: 10px;
-    color: var(--text-color);
-}
-.metric-title {
-    font-size: 16px;
-    font-weight: 600;
-}
-.metric-value {
-    font-size: 28px;
-    font-weight: 700;
-    margin-top: -8px;
-}
-</style>
-""",
+    <style>
+    .metrics-container {
+        background-color: #f0f2f6;
+        padding: 20px;
+        border-radius: 10px;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .metrics-container h3 {
+        margin: 0;
+        font-size: 24px;
+    }
+    .metrics-container p {
+        margin: 5px 0 0;
+        font-size: 18px;
+    }
+    </style>
+    """,
     unsafe_allow_html=True,
 )
 
+# Display metrics in three columns
 col1, col2, col3 = st.columns(3)
+
 with col1:
     st.markdown(
-        f"<div class='metrics-container'>"
-        f"<div class='metric-title'>Total Sales</div>"
-        f"<div class='metric-value'>${total_sales:,.2f}</div>"
-        f"</div>",
+        f"""
+        <div class="metrics-container">
+            <h3>Total Sales</h3>
+            <p>${total_sales:,.2f}</p>
+        </div>
+        """,
         unsafe_allow_html=True,
     )
+
 with col2:
     st.markdown(
-        f"<div class='metrics-container'>"
-        f"<div class='metric-title'>Total Margin</div>"
-        f"<div class='metric-value'>${total_margin:,.2f}</div>"
-        f"</div>",
+        f"""
+        <div class="metrics-container">
+            <h3>Total Margin</h3>
+            <p>${total_margin:,.2f}</p>
+        </div>
+        """,
         unsafe_allow_html=True,
     )
+
 with col3:
     st.markdown(
-        f"<div class='metrics-container'>"
-        f"<div class='metric-title'>Avg Margin %</div>"
-        f"<div class='metric-value'>{avg_margin_pct:,.2f}%</div>"
-        f"</div>",
+        f"""
+        <div class="metrics-container">
+            <h3>Average Margin %</h3>
+            <p>{avg_margin_pct:.2f}%</p>
+        </div>
+        """,
         unsafe_allow_html=True,
     )
 
